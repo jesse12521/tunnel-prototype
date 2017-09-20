@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour {
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.M))
+		if (MultipleInputManager.Cust_MenuButton())
 		{
 			if (on == false)
 			{

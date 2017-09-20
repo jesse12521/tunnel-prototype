@@ -7,15 +7,17 @@ public class CamController : MonoBehaviour
 
 	public float mainSpeed = 100.0f; //Regular speed
 	public float shiftAdd = 250.0f; //Multiplied by how long shift is held.  Basically running
-	public float maxShift = 1000.0f; //Maximum speed when holdin gshift
+	public float maxShift = 1000.0f; //Maximum speed when holding shift
 	public float camSens = 0.25f; //Sensitivity with mouse
 	private float totalRun = 1.0f;
+
 
 	private bool isRotating = false; 
 	private float speedMultiplier; 
 
-	public float mouseSensitivity = 3.0f;        // Mouse rotation sensitivity.
+	public float mouseSensitivity = 1.0f;        // Mouse rotation sensitivity.
 	private float rotationY = 0.0f;
+	private float rotationX = 0.0f;
 	
 	//public TextMeshProUGUI distText;
 	//public float distVal = 0.0f;
@@ -37,13 +39,17 @@ public class CamController : MonoBehaviour
 		return dist;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (MultipleInputManager.Cust_AButton())
 		{
 			Ray ray;
 			RaycastHit hit;
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if(!Input.GetMouseButtonDown(0))
+			{
+				ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+			}
 			if (Physics.Raycast(ray, out hit, 100.0f))
 			{
 				if (hit.collider.name == "Cylinder" && nodeIndex < 2)
@@ -79,15 +85,22 @@ public class CamController : MonoBehaviour
 		}
 		if (isRotating)
 		{
-			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
+			rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 			rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
+			rotationY = Mathf.Clamp(rotationY, -90, 90);
+			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
+		}
+		else
+		{
+			rotationX = transform.localEulerAngles.y + MultipleInputManager.Cust_Look().x * mouseSensitivity;
+			rotationY += MultipleInputManager.Cust_Look().y * mouseSensitivity;
 			rotationY = Mathf.Clamp(rotationY, -90, 90);
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
 		}
 
 		//Keyboard commands
 		Vector3 p = GetBaseInput();
-		if (Input.GetKey(KeyCode.LeftShift))
+		if (MultipleInputManager.Cust_RunButton())
 		{
 			totalRun += Time.deltaTime;
 			p = p * totalRun * shiftAdd;
@@ -113,11 +126,11 @@ public class CamController : MonoBehaviour
 		newPosition.z = transform.position.z;
 
 		//Manipulate Y plane by using Q/E keys
-		if (Input.GetKey(KeyCode.Q))
+		if (MultipleInputManager.Cust_Up())
 		{
-			newPosition.y += -speedMultiplier;
+			newPosition.y -= speedMultiplier;
 		}
-		if (Input.GetKey(KeyCode.E))
+		if (MultipleInputManager.Cust_Down())
 		{
 			newPosition.y += speedMultiplier;
 		}
@@ -130,22 +143,8 @@ public class CamController : MonoBehaviour
 	{
 		//X and Z movement
 		Vector3 p_Velocity = new Vector3();
-		if (Input.GetKey(KeyCode.W))
-		{
-			p_Velocity += new Vector3(0, 0, 1);
-		}
-		if (Input.GetKey(KeyCode.S))
-		{
-			p_Velocity += new Vector3(0, 0, -1);
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			p_Velocity += new Vector3(-1, 0, 0);
-		}
-		if (Input.GetKey(KeyCode.D))
-		{
-			p_Velocity += new Vector3(1, 0, 0);
-		}
+		p_Velocity += MultipleInputManager.Cust_HV();
+		
 		return p_Velocity;
 	}
 
