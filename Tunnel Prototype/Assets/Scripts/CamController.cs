@@ -8,14 +8,13 @@ public class CamController : MonoBehaviour
 	public float mainSpeed = 100.0f; //Regular speed
 	public float shiftAdd = 250.0f; //Multiplied by how long shift is held.  Basically running
 	public float maxShift = 1000.0f; //Maximum speed when holding shift
-	public float camSens = 0.25f; //Sensitivity with mouse
 	private float totalRun = 1.0f;
 
 
 	private bool isRotating = false; 
 	private float speedMultiplier; 
 
-	public float mouseSensitivity = 1.0f;        // Mouse rotation sensitivity.
+	public float mouseSensitivity = 0.25f;        // Mouse rotation sensitivity.
 	private float rotationY = 0.0f;
 	private float rotationX = 0.0f;
 	
@@ -87,7 +86,7 @@ public class CamController : MonoBehaviour
 		{
 			rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 			rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
-			rotationY = Mathf.Clamp(rotationY, -90, 90);
+			rotationY = Mathf.Clamp(rotationY, -45, 45);
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
 		}
 		else
@@ -126,11 +125,11 @@ public class CamController : MonoBehaviour
 		newPosition.z = transform.position.z;
 
 		//Manipulate Y plane by using Q/E keys
-		if (MultipleInputManager.Cust_Up())
+		if (MultipleInputManager.Cust_Down())
 		{
 			newPosition.y -= speedMultiplier;
 		}
-		if (MultipleInputManager.Cust_Down())
+		if (MultipleInputManager.Cust_Up())
 		{
 			newPosition.y += speedMultiplier;
 		}

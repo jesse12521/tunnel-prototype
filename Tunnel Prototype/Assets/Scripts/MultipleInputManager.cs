@@ -92,7 +92,7 @@ public static class MultipleInputManager
 	{
 		float u = 0.0f;
 		u = Input.GetAxis("Cust_Up");
-		if (u > 0.0f) {
+		if (u > 0.0f || Input.GetKey(KeyCode.E)) {
 			return true;
 		}
 		return false;
@@ -102,7 +102,7 @@ public static class MultipleInputManager
 	{	
 		float d = 0.0f;
 		d = Input.GetAxis("Cust_Down");
-		if (d > 0.0f) {
+		if (d > 0.0f || Input.GetKey(KeyCode.Q)) {
 			return true;
 		}
 		return false;
