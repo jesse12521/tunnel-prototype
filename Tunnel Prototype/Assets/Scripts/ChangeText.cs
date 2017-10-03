@@ -19,14 +19,14 @@ public class ChangeText : MonoBehaviour {
 		control = cam.GetComponent<CamController>();
 		distVal = control.GetDist();
 		distText = gameObject.GetComponent<TextMeshProUGUI>();
-		distText.text = "Dist: " + distVal.ToString("F2") + " meters";
+		distText.text = "Distance: " + distVal.ToString("F2") + " units";
 	}
 
 
 	void Update () 
 	{
 		distVal = control.GetDist();
-		distText.text = "Dist: " + distVal.ToString("F2") + " meters";
+		distText.text = "Distance: " + distVal.ToString("F2") + " units";
 	}
 	
 	#endregion

@@ -8,13 +8,14 @@ public class CamController : MonoBehaviour
 	public float mainSpeed = 100.0f; //Regular speed
 	public float shiftAdd = 250.0f; //Multiplied by how long shift is held.  Basically running
 	public float maxShift = 1000.0f; //Maximum speed when holding shift
-	private float totalRun = 1.0f;
+
 
 
 	private bool isRotating = false; 
 	private float speedMultiplier; 
 
-	public float mouseSensitivity = 0.25f;        // Mouse rotation sensitivity.
+	public float mouseSensitivity = 0.1f;        // Mouse rotation sensitivity.
+	public float joystickSensitivity = 0.1f;        // Joystick rotation sensitivity.
 	private float rotationY = 0.0f;
 	private float rotationX = 0.0f;
 	
@@ -24,6 +25,10 @@ public class CamController : MonoBehaviour
 	private GameObject[] nodeList;
 	public int nodeIndex;
 	public float dist = 0.0f;
+	private float time = 0.0f;
+
+	private Vector3 resetPosition;
+	private Vector3 resetRotation;
 
 
 	void Start()
@@ -31,6 +36,8 @@ public class CamController : MonoBehaviour
 		//distText =  GetComponent<TextMeshProUGUI>();
 		nodeList = new GameObject[2];
 		nodeIndex = 0;
+		resetPosition = transform.position;
+		resetRotation = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 
 	public float GetDist()
@@ -40,8 +47,11 @@ public class CamController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (MultipleInputManager.Cust_AButton())
+		time += Time.deltaTime;
+
+		if (MultipleInputManager.Cust_AButton() && time > 0.8f)
 		{
+			time = 0.0f;
 			Ray ray;
 			RaycastHit hit;
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -51,7 +61,7 @@ public class CamController : MonoBehaviour
 			}
 			if (Physics.Raycast(ray, out hit, 100.0f))
 			{
-				if (hit.collider.name == "Cylinder" && nodeIndex < 2)
+				if (hit.collider.name == "TunnelMesh" && nodeIndex < 2)
 				{
 					GameObject node = Instantiate(prefab, hit.point, Quaternion.identity);
 					if(nodeList[nodeIndex] == null)
@@ -64,7 +74,13 @@ public class CamController : MonoBehaviour
 						nodeList[nodeIndex] = node;
 					}
 					
-					nodeIndex = ((nodeIndex + 1) % 2);
+					//nodeIndex = ((nodeIndex + 1) % 2);
+					Debug.Log("it's going to add one");
+					nodeIndex++;
+					if(nodeIndex == 2)
+					{
+						nodeIndex = 0;
+					}
 				}
 			}
 			if (nodeList[0] != null && nodeList[1] != null)
@@ -84,39 +100,24 @@ public class CamController : MonoBehaviour
 		}
 		if (isRotating)
 		{
-			rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
-			rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
-			rotationY = Mathf.Clamp(rotationY, -45, 45);
+			rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X");// * mouseSensitivity;
+			rotationY += Input.GetAxis ("Mouse Y");// * mouseSensitivity;
+			rotationY = Mathf.Clamp(rotationY, -90, 90);
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
 		}
 		else
 		{
-			rotationX = transform.localEulerAngles.y + MultipleInputManager.Cust_Look().x * mouseSensitivity;
-			rotationY += MultipleInputManager.Cust_Look().y * mouseSensitivity;
+			rotationX = transform.localEulerAngles.y + MultipleInputManager.Cust_Look().x;// * joystickSensitivity;
+			rotationY += MultipleInputManager.Cust_Look ().y;// * joystickSensitivity;
 			rotationY = Mathf.Clamp(rotationY, -90, 90);
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
 		}
 
 		//Keyboard commands
 		Vector3 p = GetBaseInput();
-		if (MultipleInputManager.Cust_RunButton())
-		{
-			totalRun += Time.deltaTime;
-			p = p * totalRun * shiftAdd;
-			p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-			p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-			p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-			
-			speedMultiplier = totalRun * shiftAdd * Time.deltaTime;
-			speedMultiplier = Mathf.Clamp(speedMultiplier, -maxShift, maxShift);
-		}
-		else
-		{
-			totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-			p = p * mainSpeed;
-			speedMultiplier = mainSpeed * Time.deltaTime;
-		}
 
+		p = p * mainSpeed;
+		speedMultiplier = mainSpeed * Time.deltaTime;
 		p = p * Time.deltaTime;
 
 		Vector3 newPosition = transform.position;
@@ -135,6 +136,14 @@ public class CamController : MonoBehaviour
 		}
 		
 		transform.position = newPosition;
+
+
+		if (MultipleInputManager.Cust_RunButton())
+		{
+			transform.position = resetPosition;
+			transform.eulerAngles = resetRotation;
+			rotationY = 0.0f;
+		}
 	}
 	
 
