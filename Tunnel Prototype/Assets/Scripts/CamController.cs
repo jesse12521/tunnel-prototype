@@ -37,7 +37,7 @@ public class CamController : MonoBehaviour
 		nodeList = new GameObject[2];
 		nodeIndex = 0;
 		resetPosition = transform.position;
-		resetRotation = new Vector3(0.0f, 0.0f, 0.0f);
+		resetRotation = new Vector3(0.0f, 180.0f, 0.0f);
 	}
 
 	public float GetDist()

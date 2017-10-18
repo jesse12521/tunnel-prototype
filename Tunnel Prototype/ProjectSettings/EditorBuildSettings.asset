@@ -9,5 +9,23 @@ EditorBuildSettings:
     path: Assets/_Scenes/Main Menu.unity
     guid: ab25935b27ebfb343bb64675109d1b5f
   - enabled: 1
-    path: Assets/_Scenes/Real Tunnel.unity
+    path: Assets/_Scenes/UserCamera.unity
     guid: 8ac244c8a059d1449909f4bfa4a5a44f
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel A.unity
+    guid: 34754483e1432114dba95ab37af91ae8
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel B.unity
+    guid: 121cdaa403837cf41a95e4c0a7a4d3c4
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel C.unity
+    guid: fb1e4bbba81664e49b7043ba342052bd
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel D.unity
+    guid: 6aefa9efd9f919e43b2b8504387b8d39
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel E.unity
+    guid: 81fe2290a802d534b8344d22e9b0950c
+  - enabled: 1
+    path: Assets/_Scenes/Light.unity
+    guid: 04e962c6b3fb21c43a792c366cb94526
