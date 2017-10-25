@@ -513,9 +513,11 @@ MonoBehaviour:
   visibleScenes:
   - Tunnel A
   - Tunnel C
+  - Tunnel D
   visibleSceneNames:
   - Tunnel A
   - Tunnel C
+  - Tunnel D
   - Tunnel B
 --- !u!65 &1855022633
 BoxCollider:

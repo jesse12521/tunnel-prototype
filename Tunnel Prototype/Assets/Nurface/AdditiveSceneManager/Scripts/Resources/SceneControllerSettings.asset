@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Name: SceneControllerSettings
   m_EditorClassIdentifier: 
   scenes:
-  - Light
   - Main Menu
   - Tunnel A
   - Tunnel B
   - Tunnel C
   - Tunnel D
   - Tunnel E
+  - Tunnel F
+  - Tunnel G
+  - Tunnel H
+  - Tunnel I
+  - Tunnel J
+  - Tunnel K
+  - Tunnel L
   - UserCamera
   - PlayerCamera
   - RoomA
@@ -63,8 +69,6 @@ MonoBehaviour:
   - Distance Field Shader Check
   loadAtStartScenes:
   - UserCamera
-  - Light
   - Tunnel A
   persistentScenes:
   - UserCamera
-  - Light

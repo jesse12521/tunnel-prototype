@@ -236,9 +236,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibleScenes:
+  - Tunnel I
   - Tunnel J
   - Tunnel L
   visibleSceneNames:
+  - Tunnel I
   - Tunnel J
   - Tunnel L
   - Tunnel K

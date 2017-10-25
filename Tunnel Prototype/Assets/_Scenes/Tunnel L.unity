@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 1669328991}
   - component: {fileID: 1669328990}
   m_Layer: 0
-  m_Name: Plane Barrier
+  m_Name: Wall Barrier
   m_TagString: Tunnel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,8 +610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibleScenes:
+  - Tunnel J
   - Tunnel K
   visibleSceneNames:
+  - Tunnel J
   - Tunnel K
   - Tunnel L
 --- !u!65 &2131263386

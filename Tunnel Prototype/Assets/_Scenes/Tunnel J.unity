@@ -295,11 +295,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibleScenes:
+  - Tunnel H
   - Tunnel I
   - Tunnel K
+  - Tunnel L
   visibleSceneNames:
+  - Tunnel H
   - Tunnel I
   - Tunnel K
+  - Tunnel L
   - Tunnel J
 --- !u!65 &593456057
 BoxCollider:

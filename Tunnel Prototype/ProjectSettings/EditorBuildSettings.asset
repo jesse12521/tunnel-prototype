@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/UserCamera.unity
     guid: 8ac244c8a059d1449909f4bfa4a5a44f
   - enabled: 1
+    path: Assets/_Scenes/Light.unity
+    guid: 04e962c6b3fb21c43a792c366cb94526
+  - enabled: 1
     path: Assets/_Scenes/Tunnel A.unity
     guid: 34754483e1432114dba95ab37af91ae8
   - enabled: 1
@@ -27,5 +30,23 @@ EditorBuildSettings:
     path: Assets/_Scenes/Tunnel E.unity
     guid: 81fe2290a802d534b8344d22e9b0950c
   - enabled: 1
-    path: Assets/_Scenes/Light.unity
-    guid: 04e962c6b3fb21c43a792c366cb94526
+    path: Assets/_Scenes/Tunnel F.unity
+    guid: bb84a93c1e261a04092b16ffe7f3876c
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel G.unity
+    guid: 41212a6a2de624c4984c76cbb242de3e
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel H.unity
+    guid: 5280c13e9f2f40844a976b6596a87869
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel I.unity
+    guid: aaaf9b60aef13bc4b8756d6939046525
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel J.unity
+    guid: 1740a95019589ad4ba4fcbe16a2997ef
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel K.unity
+    guid: fe9d7f5568220dc458469068a9e2a512
+  - enabled: 1
+    path: Assets/_Scenes/Tunnel L.unity
+    guid: 7f2a0956cdf9e1045838da9b62611d8b
